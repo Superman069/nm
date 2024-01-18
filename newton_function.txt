@@ -1,0 +1,41 @@
+function [root, iterations] = newton(func, derivative, initial_guess, tol_abs, tol_rel, max_iter)
+    % Inputs:
+    %   func - Function to find the root for.
+    %   derivative - Derivative of the function.
+    %   initial_guess - Initial guess for the root.
+    %   tol_abs - Absolute tolerance for stopping criterion.
+    %   tol_rel - Relative tolerance for stopping criterion.
+    %   max_iter - Maximum number of iterations allowed.
+    % Outputs:
+    %   root - Approximate root of the function.
+    %   iterations - Number of iterations performed.
+
+    % Initializations
+    x = initial_guess;
+    iterations = 0;
+
+    % Newton-Raphson loop
+    while iterations < max_iter
+        % Newton-Raphson step
+        fx = func(x);
+        dfx = derivative(x);
+
+        % Check for division by zero
+        if dfx == 0
+            error('Newton-Raphson method: Division by zero. The derivative is zero at the current point.');
+        end
+
+        x = x - fx / dfx;
+
+        % Check convergence criteria
+        if abs(fx) < tol_abs || abs(x - initial_guess) < tol_rel * max(abs(x), 1)
+            root = x;
+            return;
+        end
+
+        iterations = iterations + 1;
+    end
+
+    % Maximum iterations reached without convergence
+    error('Newton-Raphson method did not converge within the maximum number of iterations.');
+end

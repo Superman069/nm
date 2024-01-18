@@ -1,0 +1,43 @@
+function [root, iterations] = secant(func, x0, x1, tol_abs, tol_rel, max_iter)
+
+    % Inputs:
+    %   func - Function to find the root for.
+    %   x0, x1 - Initial guesses for the root.
+    %   tol_abs - Absolute tolerance for stopping criterion.
+    %   tol_rel - Relative tolerance for stopping criterion.
+    %   max_iter - Maximum number of iterations allowed.
+    % Outputs:
+    %   root - Approximate root of the function.
+    %   iterations - Number of iterations performed.
+
+    % Initializations
+    iterations = 0;
+
+    % Secant method loop
+    while iterations < max_iter
+        % Secant method step
+        fx0 = func(x0);
+        fx1 = func(x1);
+
+        % Check for division by zero
+        if fx1 - fx0 == 0
+            error('Secant method: Division by zero. The function values at the current points are equal.');
+        end
+
+        x2 = x1 - fx1 * (x1 - x0) / (fx1 - fx0);
+
+        % Check convergence criteria
+        if abs(fx1) < tol_abs || abs(x1 - x0) < tol_rel * max(abs(x1), 1)
+            root = x1;
+            return;
+        end
+
+        x0 = x1;
+        x1 = x2;
+
+        iterations = iterations + 1;
+    end
+
+    % Maximum iterations reached without convergence
+    error('Secant method did not converge within the maximum number of iterations.');
+end

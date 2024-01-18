@@ -1,0 +1,19 @@
+clc;
+clear all;
+
+tol_abs = 1e-6;
+tol_rel = 1e-6;
+maxIter = 100;
+
+% Function 1
+f1 = @(x) (x^2 - 9);
+x0 = 1;
+x1 = 5;
+
+tic;
+[root, iterations] = secant(f1, x0, x1, tol_abs, tol_rel, maxIter);
+time_taken = toc;
+
+fprintf('Root: %.6f\n', root);
+fprintf('Number of Iterations: %d\n', iterations);
+fprintf('Time taken: %f seconds\n', time_taken);

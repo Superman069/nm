@@ -1,0 +1,38 @@
+function [root, iterations] = regulafalsi(func, a, b, tol_abs, tol_rel, max_iter)
+    % Initializations
+    fa = func(a);
+    fb = func(b);
+    iterations = 0;
+
+    % Check if the sign of the function values at a and b are different
+    if fa * fb > 0
+        error('The Regula Falsi method requires f(a) and f(b) to have opposite signs.');
+    end
+
+    % Regula Falsi loop
+    while iterations < max_iter
+        % Regula Falsi step
+        c = (a * fb - b * fa) / (fb - fa);
+        fc = func(c);
+
+        % Check convergence criteria
+        if abs(fc) < tol_abs || abs(b - a) < tol_rel * max(abs(b), 1)
+            root = c;
+            return;
+        end
+
+        % Update interval
+        if fa * fc < 0
+            b = c;
+            fb = fc;
+        else
+            a = c;
+            fa = fc;
+        end
+
+        iterations = iterations + 1;
+    end
+
+    % Maximum iterations reached without convergence
+    error('Regula Falsi method did not converge within the maximum number of iterations.');
+end
