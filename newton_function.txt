@@ -1,16 +1,5 @@
 function [root, iterations] = newton(func, derivative, initial_guess, tol_abs, tol_rel, max_iter)
-    % Inputs:
-    %   func - Function to find the root for.
-    %   derivative - Derivative of the function.
-    %   initial_guess - Initial guess for the root.
-    %   tol_abs - Absolute tolerance for stopping criterion.
-    %   tol_rel - Relative tolerance for stopping criterion.
-    %   max_iter - Maximum number of iterations allowed.
-    % Outputs:
-    %   root - Approximate root of the function.
-    %   iterations - Number of iterations performed.
 
-    % Initializations
     x = initial_guess;
     iterations = 0;
 
