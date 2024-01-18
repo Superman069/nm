@@ -1,16 +1,5 @@
 function [root, iterations] = secant(func, x0, x1, tol_abs, tol_rel, max_iter)
 
-    % Inputs:
-    %   func - Function to find the root for.
-    %   x0, x1 - Initial guesses for the root.
-    %   tol_abs - Absolute tolerance for stopping criterion.
-    %   tol_rel - Relative tolerance for stopping criterion.
-    %   max_iter - Maximum number of iterations allowed.
-    % Outputs:
-    %   root - Approximate root of the function.
-    %   iterations - Number of iterations performed.
-
-    % Initializations
     iterations = 0;
 
     % Secant method loop
